@@ -3,13 +3,13 @@
 # Function to test network connectivity
 test_connectivity() {
     echo "Testing network connectivity..."
-    ping -c 1 -W 5 8.8.8.8 >/dev/null 2>&1
+    ping -c 1 -W 5 "${DNS_SERVER}" >/dev/null 2>&1
     return $?
 }
 
 # Check if the script has the correct number of arguments
-if [[ $# -lt 2 || $# -gt 3 ]]; then
-    echo "Usage: $0 <WiFi Name> <WiFi Password> [Delay in seconds (default: 20)]"
+if [[ $# -lt 2 || $# -gt 4 ]]; then
+    echo "Usage: $0 <WiFi Name> <WiFi Password> [Delay in seconds (default: 20)] [DNS Server (default: 8.8.8.8)]"
     exit 1
 fi
 
@@ -17,6 +17,7 @@ fi
 WIFI_NAME="$1"
 WIFI_PASSWORD="$2"
 DELAY="${3:-20}"  # Use third argument if provided, otherwise default to 20
+DNS_SERVER="${4:-8.8.8.8}"  # Use fourth argument if provided, otherwise default to Google DNS
 
 # Test if already connected
 if test_connectivity; then

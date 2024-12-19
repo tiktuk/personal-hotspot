@@ -8,14 +8,15 @@ test_connectivity() {
 }
 
 # Check if the script has the correct number of arguments
-if [[ $# -ne 2 ]]; then
-    echo "Usage: $0 <WiFi Name> <WiFi Password>"
+if [[ $# -lt 2 || $# -gt 3 ]]; then
+    echo "Usage: $0 <WiFi Name> <WiFi Password> [Delay in seconds (default: 20)]"
     exit 1
 fi
 
 # Assign command-line arguments to variables
 WIFI_NAME="$1"
 WIFI_PASSWORD="$2"
+DELAY="${3:-20}"  # Use third argument if provided, otherwise default to 20
 
 # Test if already connected
 if test_connectivity; then
@@ -28,8 +29,8 @@ echo "Attempting to connect to Wi-Fi network: $WIFI_NAME..."
 networksetup -setairportnetwork en0 "$WIFI_NAME" "$WIFI_PASSWORD"
 
 # Wait for the connection to be established
-echo "Waiting for the connection to be established..."
-sleep 20
+echo "Waiting for the connection to be established (${DELAY}s)..."
+sleep "$DELAY"
 
 # Test new connection
 if test_connectivity; then

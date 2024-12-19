@@ -18,18 +18,9 @@ networksetup -setairportnetwork en0 "$WIFI_NAME" "$WIFI_PASSWORD"
 echo "Waiting for the connection to be established..."
 sleep 20
 
-# Debug: Show the raw output of the current network query
-RAW_OUTPUT=$(networksetup -getairportnetwork en0)
-echo "Raw network output: $RAW_OUTPUT"
-
-# Extract the current network name from the output
-CURRENT_NETWORK=$(echo "$RAW_OUTPUT" | awk -F": " '{print $2}')
-
-# Debug: Show what CURRENT_NETWORK contains
-echo "Detected network: $CURRENT_NETWORK"
-
-# Check if the connection was successful
-if [[ "$CURRENT_NETWORK" == "$WIFI_NAME" ]]; then
+# Test network connectivity
+echo "Testing network connectivity..."
+if ping -c 1 -W 5 8.8.8.8 >/dev/null 2>&1; then
   echo "Connected to Wi-Fi network: $WIFI_NAME"
 else
   echo "Failed to connect to Wi-Fi network: $WIFI_NAME"

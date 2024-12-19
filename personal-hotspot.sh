@@ -9,7 +9,13 @@ test_connectivity() {
 
 # Check if the script has the correct number of arguments
 if [[ $# -lt 2 || $# -gt 4 ]]; then
+    echo "Personal Hotspot Connector - Connect to WiFi networks and personal hotspots on macOS"
+    echo
     echo "Usage: $0 <WiFi Name> <WiFi Password> [Delay in seconds (default: 20)] [DNS Server (default: 8.8.8.8)]"
+    echo
+    echo "Example:"
+    echo "  $0 \"My iPhone\" \"password123\"     # Connect to iPhone hotspot with default settings"
+    echo "  $0 \"My iPhone\" \"password123\" 30  # Connect with 30 second connection delay"
     exit 1
 fi
 

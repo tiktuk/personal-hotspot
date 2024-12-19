@@ -4,6 +4,15 @@ A bash script that can connect to WiFi networks and personal hotspots on macOS. 
 
 ## Installation
 
+### Using Homebrew
+
+```bash
+brew tap tiktuk/homebrew-personal-hotspot
+brew install personal-hotspot.sh
+```
+
+### Manual Installation
+
 1. Clone this repository or download the `personal-hotspot.sh` script
 2. Make the script executable:
    ```bash
